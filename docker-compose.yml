@@ -1,0 +1,47 @@
+version: "3"
+services:
+  jenkins:
+    platform: linux/arm64
+    image: jenkins/jenkins:lts-jdk11
+    user: root
+    volumes:
+      - ./sdn_jenkins:/var/jenkins_home
+    ports:
+      - 58080:8080
+      - 50000:50000
+
+  redmine:
+    image: sdn_redmine:5.0
+    restart: always
+    ports:
+      - 58000:3000
+    volumes:
+      - ./sdn_redmine/files:/usr/src/redmine/files
+      - ./sdn_redmine/plugins:/usr/src/redmine/plugins
+      - ./sdn_redmine/themes:/usr/src/redmine/public/themes
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: example
+      REDMINE_SECRET_KEY_BASE: supersecretkey
+
+  db:
+    image: mysql:5.7
+    platform: linux/x86_64
+    restart: always
+    volumes:
+      - ./sdn_mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: redmine
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci 
+
+  grafana:
+    image: grafana/grafana:8.2.6
+    volumes:
+      - ./sdn_grafana:/var/lib/grafana
+    ports:
+      - 53000:3000
+    user: '472'
+
