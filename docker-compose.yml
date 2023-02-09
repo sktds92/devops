@@ -19,6 +19,7 @@ services:
       - ./sdn_redmine/files:/usr/src/redmine/files
       - ./sdn_redmine/plugins:/usr/src/redmine/plugins
       - ./sdn_redmine/themes:/usr/src/redmine/public/themes
+      - ./sdn_redmine/project:/usr/src/redmine/project
     environment:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: example
