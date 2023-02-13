@@ -9,7 +9,6 @@ services:
     restart: "unless-stopped" 
 
   jenkins:
-    platform: linux/arm64
     image: jenkins/jenkins:lts-jdk11
     container_name: jenkins
     user: root
@@ -40,7 +39,6 @@ services:
     restart: "unless-stopped"
   db:
     image: mysql:5.7
-    platform: linux/x86_64
     restart: always
     volumes:
       - ./sdn_mysql:/var/lib/mysql
