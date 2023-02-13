@@ -1,18 +1,31 @@
 version: "3"
 services:
+  proxy:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./sdn_nginx:/etc/nginx/conf.d
+    restart: "unless-stopped" 
+
   jenkins:
     platform: linux/arm64
     image: jenkins/jenkins:lts-jdk11
+    container_name: jenkins
     user: root
     volumes:
       - ./sdn_jenkins:/var/jenkins_home
-    ports:
-      - 58080:8080
-      - 50000:50000
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
+    expose:
+      - "8080"
+      - "50000"
+    restart: "unless-stopped"
 
   redmine:
     image: sdn_redmine:5.0
     restart: always
+    container_name: redmine
     ports:
       - 58000:3000
     volumes:
@@ -24,7 +37,7 @@ services:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: example
       REDMINE_SECRET_KEY_BASE: supersecretkey
-
+    restart: "unless-stopped"
   db:
     image: mysql:5.7
     platform: linux/x86_64
@@ -36,12 +49,16 @@ services:
       MYSQL_DATABASE: redmine
     command:
       - --character-set-server=utf8
-      - --collation-server=utf8_general_ci 
+      - --collation-server=utf8_general_ci
+    expose:
+      - 3306 
 
   grafana:
     image: grafana/grafana:8.2.6
     volumes:
       - ./sdn_grafana:/var/lib/grafana
+    expose:
+      - 3000
     ports:
       - 53000:3000
     user: '472'
