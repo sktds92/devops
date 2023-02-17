@@ -24,7 +24,6 @@ services:
 
   redmine:
     image: sdn_redmine:5.0
-    restart: always
     container_name: redmine
     expose:
       - 9100
