@@ -9,7 +9,7 @@ services:
     restart: "unless-stopped" 
 
   jenkins:
-    image: sdn/jenkins:0.1
+    build: ./sdn_jenkins_config
     container_name: jenkins
     user: root
     volumes:
