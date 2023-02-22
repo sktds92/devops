@@ -15,7 +15,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./sdn_jenkins:/var/jenkins_home
-      - ~/.ssh/known_hosts:/root/.ssh/known_hosts
+      - ~/sdn_jenkins_config:/root/.ssh
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
     expose:
