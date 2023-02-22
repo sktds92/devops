@@ -23,7 +23,7 @@ services:
     restart: "unless-stopped"
 
   redmine:
-    build: ./sdn_jenkins
+    build: ./sdn_redmine
     container_name: redmine
     expose:
       - 9100
@@ -42,7 +42,6 @@ services:
   db:
     image: mysql:5.7
     restart: always
-    platform: linux/amd64
     volumes:
       - ./sdn_mysql:/var/lib/mysql
     environment:
