@@ -23,7 +23,7 @@ services:
     restart: "unless-stopped"
 
   redmine:
-    image: sdn_redmine:5.0
+    build: ./sdn_jenkins
     container_name: redmine
     expose:
       - 9100
