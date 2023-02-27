@@ -55,15 +55,20 @@ services:
       - 3306 
 
   grafana:
-    image: grafana/grafana:8.2.6
+    image: grafana/grafana:9.2.5-ubuntu
     container_name: grafana
     volumes:
       - ./sdn_grafana/grafana:/var/lib/grafana
       - ./sdn_grafana/configuration/defaults.ini:/usr/share/grafana/conf/defaults.ini
     expose:
       - 3000
-    ports:
-      - 53000:3000
+#    environment:
+#      - USER_NAME
+#      - USER_ID
+#      - GROUP_NAME
+#      - GROUP_ID
+#    ports:
+#      - 53000:3000
     user: '472'
 
   prometheus:
