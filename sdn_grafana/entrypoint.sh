@@ -5,8 +5,6 @@ groupadd -g ${GROUP_ID} ${GROUP_NAME}
 usermod -g ${GROUP_NAME} ${USER_NAME}
 usermod -G grafana ${USER_NAME}
 
-echo whoami
-
 chown -R root:root /etc/grafana && \
 chmod -R a+r /etc/grafana && \
 chown -R grafana:grafana /var/lib/grafana && \
