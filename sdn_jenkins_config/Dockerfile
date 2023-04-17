@@ -9,8 +9,7 @@ RUN mkdir -p /etc/apt/keyrings
 RUN curl -sLS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/keyrings/microsoft.gpg > /dev/null
 RUN chmod go+r /etc/apt/keyrings/microsoft.gpg
 RUN AZ_REPO=$(lsb_release -cs)
-RUN echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
-RUN tee /etc/apt/sources.list.d/azure-cli.list
+RUN echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list
 RUN apt-get update
 RUN apt-get install azure-cli
 #RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
