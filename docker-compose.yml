@@ -15,6 +15,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./sdn_jenkins:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
       - ~/.ssh:/root/.ssh
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
